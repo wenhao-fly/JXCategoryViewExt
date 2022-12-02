@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong) JXCategoryListContainerView *containerView;
 
+@property (nonatomic, strong)JXCategoryTitleImageView *categoryView;
+
 @property (nonatomic, strong) NSArray *titles;
 
 @end
@@ -38,13 +40,13 @@
     
     self.view.backgroundColor = UIColor.whiteColor;
     
-    self.titleView.frame = CGRectMake(0, 100, self.view.bounds.size.width, 40);
+    self.categoryView.frame = CGRectMake(0, 100, self.view.bounds.size.width, 40);
     self.dotView.frame = CGRectMake(0, 140, self.view.bounds.size.width, 40);
     self.subTitleView.frame = CGRectMake(0, 180, self.view.bounds.size.width, 54);
     self.badgeView.frame = CGRectMake(0, 234, self.view.bounds.size.width, 40);
     self.containerView.frame = CGRectMake(0, 280, self.view.bounds.size.width, self.view.bounds.size.height - 280);
     
-    [self.view addSubview:self.titleView];
+    [self.view addSubview:self.categoryView];
     [self.view addSubview:self.dotView];
     [self.view addSubview:self.subTitleView];
     [self.view addSubview:self.badgeView];
@@ -252,6 +254,35 @@
         _containerView = [[JXCategoryListContainerView alloc] initWithType:JXCategoryListContainerType_CollectionView delegate:self];
     }
     return _containerView;
+}
+
+- (JXCategoryTitleImageView *)categoryView {
+    if (!_categoryView) {
+        _categoryView = [JXCategoryTitleImageView new];
+        _categoryView.delegate              = self;
+        _categoryView.backgroundColor       = [UIColor clearColor];
+        _categoryView.titleFont             = [UIFont systemFontOfSize:16.0f];
+        _categoryView.titleSelectedFont     = [UIFont boldSystemFontOfSize:20.0f];
+        _categoryView.imageSize             = CGSizeMake(46.0f, 28.0f);
+        _categoryView.imageZoomEnabled      = YES;  // 图片缩放
+        _categoryView.imageZoomScale        = 1.3;  // 图片缩放程度
+        _categoryView.titleLabelZoomEnabled = YES;  // 标题缩放
+        _categoryView.titleLabelZoomScale   = 1.3;  // 标题缩放程度
+        _categoryView.contentScrollViewClickTransitionAnimationEnabled = NO;
+        _categoryView.titleLabelAnchorPointStyle = JXCategoryTitleLabelAnchorPointStyleCenter;
+        _categoryView.cellSpacing = 30;
+        _categoryView.contentEdgeInsetLeft = 15;
+        _categoryView.listContainer = self.containerView;
+        
+        _categoryView.titles = @[@"你好", @"我好", @"他好", @"大家好"];
+        _categoryView.imageURLs = nil;
+        _categoryView.selectedImageURLs = nil;
+//        _categoryView.imageTypes = self.imgTypes;
+        
+        // 刷新内容
+        [self.containerView reloadData];
+    }
+    return _categoryView;
 }
 
 - (NSArray *)titles {

@@ -19,6 +19,11 @@ typedef NS_ENUM(NSUInteger, JXCategoryTitleImageType) {
 
 @interface JXCategoryTitleImageCellModel : JXCategoryTitleCellModel
 
+//add 添加了标签badge
+@property (copy, nonatomic)NSString *badgeContent; //徽标
+@property (strong, nonatomic)UIColor *badgeColor;
+@property (strong, nonatomic)UIColor *badgeBgColor;
+
 // 自定义imageView类
 @property (nonatomic, strong) Class imageViewClass;
 

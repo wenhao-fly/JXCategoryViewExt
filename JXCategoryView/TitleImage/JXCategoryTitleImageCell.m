@@ -26,6 +26,8 @@
     self.currentImageInfo = nil;
     self.currentImageName = nil;
     self.currentImageURL = nil;
+    
+    self.badgeLabel.text = nil;
 }
 
 - (void)initializeViews {
@@ -41,6 +43,13 @@
     self.stackView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.stackView.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor].active = YES;
     [self.stackView.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = YES;
+    
+    self.badgeLabel = [[UILabel alloc] init];
+    self.badgeLabel.textAlignment = NSTextAlignmentCenter;
+    self.badgeLabel.layer.masksToBounds = YES;
+    self.badgeLabel.layer.cornerRadius = 6.5;
+    self.badgeLabel.font = [UIFont systemFontOfSize:9];
+    [self.contentView addSubview:self.badgeLabel];
 }
 
 - (void)initialImageViewWithClass:(Class)cls {
@@ -151,6 +160,34 @@
     } else {
         self.imageView.transform = CGAffineTransformIdentity;
     }
+    
+    if(myCellModel.badgeContent.length > 0) {
+        self.badgeLabel.textColor = myCellModel.badgeColor;
+        self.badgeLabel.backgroundColor = myCellModel.badgeBgColor;
+        self.badgeLabel.text = myCellModel.badgeContent;
+        CGFloat width =  [self widthWithFont:[UIFont systemFontOfSize:9] constrainedToHeight:13 withStr:myCellModel.badgeContent];
+        self.badgeLabel.frame = CGRectMake(cellModel.cellWidth - width - 8 , 2, width + 8, 13);
+        self.badgeLabel.hidden = false;
+    }else {
+        self.badgeLabel.hidden = true;
+    }
+    
+    
+}
+
+- (CGFloat)widthWithFont:(UIFont *)font constrainedToHeight:(CGFloat)height withStr:(NSString *)str
+{
+    UIFont *textFont = font ? font : [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    NSDictionary *attributes = @{NSFontAttributeName: textFont,
+                                 NSParagraphStyleAttributeName: paragraph};
+    CGSize textSize = [str boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, height)
+                                         options:(NSStringDrawingUsesLineFragmentOrigin |
+                                                  NSStringDrawingTruncatesLastVisibleLine)
+                                      attributes:attributes
+                                         context:nil].size;
+    return ceil(textSize.width);
 }
 
 @end

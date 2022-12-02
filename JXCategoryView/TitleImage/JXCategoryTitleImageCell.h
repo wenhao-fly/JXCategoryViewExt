@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) UIImageView *imageView;
 
+@property (nonatomic, strong) UILabel *badgeLabel; //添加一个标记
+
 @end

@@ -44,4 +44,9 @@
 // 计算指示器位置时是否忽略图片的宽度
 @property (nonatomic, assign, getter=isIgnoreImageWidth) BOOL ignoreImageWidth;
 
+//add 添加了标签badge
+@property (strong, nonatomic)NSArray <NSString *> *badgeContents; //徽标
+@property (strong, nonatomic)NSArray <UIColor *> *badgeColors;
+@property (strong, nonatomic)NSArray <UIColor *> *badgeBgColors;
+
 @end
