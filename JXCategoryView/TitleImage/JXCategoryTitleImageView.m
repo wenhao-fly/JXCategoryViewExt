@@ -68,11 +68,14 @@
         myCellModel.selectedImageName = self.selectedImageNames[index];
     }else if (self.selectedImageURLs && self.selectedImageURLs.count != 0) {
         myCellModel.selectedImageURL = self.selectedImageURLs[index];
-    }else if (self.badgeContents && self.badgeContents.count != 0) {
+    }
+    if (self.badgeContents && self.badgeContents.count != 0) {
         myCellModel.badgeContent = self.badgeContents[index];
-    }else if (self.badgeColors && self.badgeColors.count != 0) {
+    }
+    if (self.badgeColors && self.badgeColors.count != 0) {
         myCellModel.badgeColor = self.badgeColors[index];
-    }else if (self.badgeBgColors && self.badgeBgColors.count != 0) {
+    }
+    if (self.badgeBgColors && self.badgeBgColors.count != 0) {
         myCellModel.badgeBgColor = self.badgeBgColors[index];
     }
     myCellModel.imageZoomEnabled = self.imageZoomEnabled;

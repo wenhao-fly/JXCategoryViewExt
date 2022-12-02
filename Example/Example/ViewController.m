@@ -277,7 +277,8 @@
         _categoryView.titles = @[@"你好", @"我好", @"他好", @"大家好"];
         _categoryView.imageURLs = nil;
         _categoryView.selectedImageURLs = nil;
-//        _categoryView.imageTypes = self.imgTypes;
+        _categoryView.imageTypes = nil;
+        _categoryView.badgeContents = @[@"你好", @"", @"", @"大家好"];
         
         // 刷新内容
         [self.containerView reloadData];

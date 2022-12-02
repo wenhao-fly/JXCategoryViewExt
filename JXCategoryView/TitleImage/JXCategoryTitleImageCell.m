@@ -166,7 +166,7 @@
         self.badgeLabel.backgroundColor = myCellModel.badgeBgColor;
         self.badgeLabel.text = myCellModel.badgeContent;
         CGFloat width =  [self widthWithFont:[UIFont systemFontOfSize:9] constrainedToHeight:13 withStr:myCellModel.badgeContent];
-        self.badgeLabel.frame = CGRectMake(cellModel.cellWidth - width - 8 , 2, width + 8, 13);
+        self.badgeLabel.frame = CGRectMake(cellModel.cellWidth - 5 , 2, width + 8, 13);
         self.badgeLabel.hidden = false;
     }else {
         self.badgeLabel.hidden = true;
