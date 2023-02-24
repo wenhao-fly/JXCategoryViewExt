@@ -29,6 +29,10 @@
 
 @property (nonatomic, strong)JXCategoryTitleImageView *categoryView;
 
+@property (nonatomic, strong)JXCategoryTitleImageView *categoryViewTop;
+
+@property (nonatomic, strong)JXCategoryIndicatorLineView *lineViewTop;
+
 @property (nonatomic, strong) NSArray *titles;
 
 @end
@@ -44,12 +48,14 @@
     self.dotView.frame = CGRectMake(0, 140, self.view.bounds.size.width, 40);
     self.subTitleView.frame = CGRectMake(0, 180, self.view.bounds.size.width, 54);
     self.badgeView.frame = CGRectMake(0, 234, self.view.bounds.size.width, 40);
-    self.containerView.frame = CGRectMake(0, 280, self.view.bounds.size.width, self.view.bounds.size.height - 280);
+    self.categoryViewTop.frame = CGRectMake(0, 280, self.view.bounds.size.width, 40);
+    self.containerView.frame = CGRectMake(0, 320, self.view.bounds.size.width, self.view.bounds.size.height - 320);
     
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.dotView];
     [self.view addSubview:self.subTitleView];
     [self.view addSubview:self.badgeView];
+    [self.view addSubview:self.categoryViewTop];
     [self.view addSubview:self.containerView];
 }
 
@@ -288,6 +294,46 @@
 
 - (NSArray *)titles {
     return @[@"你的", @"我的", @"他的", @"你的", @"我的"];
+}
+
+
+- (JXCategoryTitleImageView *)categoryViewTop {
+    if (!_categoryViewTop) {
+        _categoryViewTop = [JXCategoryTitleImageView new];
+        _categoryViewTop.delegate              = self;
+        _categoryViewTop.backgroundColor       = [UIColor clearColor];
+        _categoryViewTop.titleFont             = [UIFont systemFontOfSize:16.0f];
+        _categoryViewTop.titleSelectedFont     = [UIFont systemFontOfSize:20.0f];
+        _categoryViewTop.titleColor            = UIColor.blackColor;
+        _categoryViewTop.titleSelectedColor    = UIColor.blueColor;
+        _categoryViewTop.imageSize             = CGSizeMake(0.0f, 28.0f);
+        _categoryViewTop.imageZoomEnabled      = YES;  // 图片缩放
+        _categoryViewTop.imageZoomScale        = 1.3;  // 图片缩放程度
+        _categoryViewTop.titleLabelZoomEnabled = YES;  // 标题缩放 为YES时titleSelectedFont失效，以titleFont为准。
+        _categoryViewTop.titleLabelZoomScale   = 1.3;  // 标题缩放程度
+        _categoryViewTop.contentScrollViewClickTransitionAnimationEnabled = NO;
+        _categoryViewTop.titleLabelAnchorPointStyle = JXCategoryTitleLabelAnchorPointStyleCenter;
+        _categoryViewTop.cellSpacing = 10;
+        _categoryViewTop.contentEdgeInsetLeft = 15;
+        
+        _categoryViewTop.titles = @[@"你好", @"我好", @"他好", @"大家好"];
+        
+        _categoryViewTop.indicators    = @[self.lineViewTop];
+        
+        _categoryViewTop.listContainer = self.containerView;
+    }
+    return _categoryViewTop;
+}
+
+- (JXCategoryIndicatorLineView *)lineViewTop {
+    if (!_lineViewTop) {
+        _lineViewTop = [JXCategoryIndicatorLineView new];
+        _lineViewTop.indicatorWidth     = 20;
+        _lineViewTop.indicatorHeight    = 4;
+        _lineViewTop.indicatorColor     = UIColor.redColor;
+        _lineViewTop.lineStyle          = JXCategoryIndicatorLineStyle_Lengthen;
+    }
+    return _lineViewTop;
 }
 
 @end
