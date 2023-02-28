@@ -192,16 +192,19 @@
         }else if (self.scrollStyle == JXCategoryIndicatorScrollStyleSimple) {
             [UIView animateWithDuration:self.scrollAnimationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.frame = targetIndicatorFrame;
-                
-                //- (void)jx_refreshState:(JXCategoryIndicatorParamsModel *)model 也在setframe，导致这里的动画无效
-                //统一写到这里
-                self.backgroundColor = self.indicatorColor;
-                self.layer.cornerRadius = [self indicatorCornerRadiusValue:model.selectedCellFrame];
+                //- (void)jx_refreshState:(JXCategoryIndicatorParamsModel *)model 也在setframe，导致这里的动画无效⬇️
+                [self changeBackgroundColor];
             } completion: nil];
         }
     }else {
         self.frame = targetIndicatorFrame;
     }
+}
+
+//- (void)jx_refreshState:(JXCategoryIndicatorParamsModel *)model 也在setframe，导致这里的动画无效
+//统一写到这里
+- (void)changeBackgroundColor {
+    self.backgroundColor = self.indicatorColor;
 }
 
 @end

@@ -25,4 +25,7 @@ typedef NS_ENUM(NSUInteger, JXCategoryIndicatorLineStyle) {
  */
 @property (nonatomic, assign) CGFloat lineScrollOffsetX;
 
+//add
+- (void)changeBackgroundColor;
+
 @end
