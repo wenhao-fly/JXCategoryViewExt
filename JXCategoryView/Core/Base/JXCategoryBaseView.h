@@ -91,7 +91,7 @@
 
 @property (nonatomic, assign) NSInteger defaultSelectedIndex;   //修改初始化的时候默认选择的index
 
-@property (nonatomic, assign, readonly) NSInteger selectedIndex;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @property (nonatomic, assign, getter=isContentScrollViewClickTransitionAnimationEnabled) BOOL contentScrollViewClickTransitionAnimationEnabled;    //点击cell进行contentScrollView切换时是否需要动画。默认为YES
 

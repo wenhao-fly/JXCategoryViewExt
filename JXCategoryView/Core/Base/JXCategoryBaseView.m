@@ -28,7 +28,6 @@ struct DelegateFlags {
 
 @property (nonatomic, strong) JXCategoryCollectionView *collectionView;
 @property (nonatomic, assign) struct DelegateFlags delegateFlags;
-@property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, assign) CGFloat innerCellSpacing;
 @property (nonatomic, assign) CGPoint lastContentViewContentOffset;
 @property (nonatomic, strong) JXCategoryViewAnimator *animator;
