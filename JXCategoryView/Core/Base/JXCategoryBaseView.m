@@ -495,26 +495,27 @@ struct DelegateFlags {
     }
 
     self.needReloadByBecomeActive = NO;
-    if (self.selectedIndex == targetIndex) {
-        //目标index和当前选中的index相等，就不需要处理后续的选中更新逻辑，只需要回调代理方法即可。
-        if (selectedType == JXCategoryCellSelectedTypeCode) {
-            [self.listContainer didClickSelectedItemAtIndex:targetIndex];
-        }else if (selectedType == JXCategoryCellSelectedTypeClick) {
-            [self.listContainer didClickSelectedItemAtIndex:targetIndex];
-            if (self.delegateFlags.didClickSelectedItemAtIndexFlag) {
-                [self.delegate categoryView:self didClickSelectedItemAtIndex:targetIndex];
-            }
-        }else if (selectedType == JXCategoryCellSelectedTypeScroll) {
-            if (self.delegateFlags.didScrollSelectedItemAtIndexFlag) {
-                [self.delegate categoryView:self didScrollSelectedItemAtIndex:targetIndex];
-            }
-        }
-        if (self.delegateFlags.didSelectedItemAtIndexFlag) {
-            [self.delegate categoryView:self didSelectedItemAtIndex:targetIndex];
-        }
-        self.scrollingTargetIndex = -1;
-        return NO;
-    }
+//    由于滑动中会先设置了self.selectedIndex 导致走这里了 scroll就不滚动了
+//    if (self.selectedIndex == targetIndex) {
+//        //目标index和当前选中的index相等，就不需要处理后续的选中更新逻辑，只需要回调代理方法即可。
+//        if (selectedType == JXCategoryCellSelectedTypeCode) {
+//            [self.listContainer didClickSelectedItemAtIndex:targetIndex];
+//        }else if (selectedType == JXCategoryCellSelectedTypeClick) {
+//            [self.listContainer didClickSelectedItemAtIndex:targetIndex];
+//            if (self.delegateFlags.didClickSelectedItemAtIndexFlag) {
+//                [self.delegate categoryView:self didClickSelectedItemAtIndex:targetIndex];
+//            }
+//        }else if (selectedType == JXCategoryCellSelectedTypeScroll) {
+//            if (self.delegateFlags.didScrollSelectedItemAtIndexFlag) {
+//                [self.delegate categoryView:self didScrollSelectedItemAtIndex:targetIndex];
+//            }
+//        }
+//        if (self.delegateFlags.didSelectedItemAtIndexFlag) {
+//            [self.delegate categoryView:self didSelectedItemAtIndex:targetIndex];
+//        }
+//        self.scrollingTargetIndex = -1;
+//        return NO;
+//    }
 
     //通知子类刷新当前选中的和将要选中的cellModel
     JXCategoryBaseCellModel *lastCellModel = self.dataSource[self.selectedIndex];
