@@ -189,6 +189,7 @@ struct DelegateFlags {
             break;
         }
     }
+    if(indexPath.row == self.selectedIndex) return;
     if (!isTransitionAnimating) {
         //当前没有正在过渡的item，才允许点击选中
         [self clickSelectItemAtIndex:indexPath.row];
