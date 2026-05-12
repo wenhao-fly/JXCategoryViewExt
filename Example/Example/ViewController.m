@@ -280,11 +280,27 @@
         _categoryView.contentEdgeInsetLeft = 15;
         _categoryView.listContainer = self.containerView;
         
-        _categoryView.titles = @[@"你好", @"我好", @"他好", @"大家好"];
-        _categoryView.imageURLs = nil;
-        _categoryView.selectedImageURLs = nil;
-        _categoryView.imageTypes = nil;
-        _categoryView.badgeContents = @[@"你好", @"", @"", @"大家好"];
+        _categoryView.titles = @[@"你好", @"1", @"2", @"大家好"];
+        _categoryView.imageURLs = @[[NSURL URLWithString:@""], [NSURL URLWithString:@"http://app.toppps.com/test/blue/subject/28/subjectLogo/20260416105221_q8r6E.png"], [NSURL URLWithString:@"https://app.toppps.com/blue/subject/12/logo/logo3.png"],[NSURL URLWithString:@""]];
+        _categoryView.selectedImageURLs = @[[NSURL URLWithString:@""], [NSURL URLWithString:@"http://app.toppps.com/test/blue/subject/28/subjectLogo/20260416105221_q8r6E.png"], [NSURL URLWithString:@"https://app.toppps.com/blue/subject/12/logo/logo3.png"],[NSURL URLWithString:@""]];
+        _categoryView.imageTypes = @[@(JXCategoryTitleImageType_OnlyTitle),@(JXCategoryTitleImageType_OnlyImage),@(JXCategoryTitleImageType_OnlyImage),@(JXCategoryTitleImageType_OnlyTitle)];
+        // 加载网络图片
+        _categoryView.loadImageCallback = ^(UIImageView *imageView, NSURL *imageURL) {
+              dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                  NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                  UIImage *image = [UIImage imageWithData:data];
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      imageView.image = image;
+                  });
+              });
+          };
+        _categoryView.imageSizes = @[
+              [NSValue valueWithCGSize:CGSizeMake(46, 28)],  // 第1个（OnlyTitle，实际用不到）
+              [NSValue valueWithCGSize:CGSizeMake(80, 20)],  // 第2个
+              [NSValue valueWithCGSize:CGSizeMake(90, 17)],  // 第3个
+              [NSValue valueWithCGSize:CGSizeMake(46, 28)]   // 第4个（OnlyTitle，实际用不到）
+          ];
+        
         
         // 刷新内容
         [self.containerView reloadData];

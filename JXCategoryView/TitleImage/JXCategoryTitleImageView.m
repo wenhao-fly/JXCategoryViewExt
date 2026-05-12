@@ -53,7 +53,7 @@
     JXCategoryTitleImageCellModel *myCellModel = (JXCategoryTitleImageCellModel *)cellModel;
     myCellModel.loadImageCallback = self.loadImageCallback;
     myCellModel.imageType = [self.imageTypes[index] integerValue];
-    myCellModel.imageSize = self.imageSize;
+    myCellModel.imageSize = (self.imageSizes && index < self.imageSizes.count) ? [self.imageSizes[index] CGSizeValue] : self.imageSize;
     myCellModel.titleImageSpacing = self.titleImageSpacing;
     if (self.imageInfoArray && self.imageInfoArray.count != 0) {
         myCellModel.imageInfo = self.imageInfoArray[index];
@@ -108,21 +108,23 @@
     if (self.cellWidth == JXCategoryViewAutomaticDimension) {
         CGFloat titleWidth = [super preferredCellWidthAtIndex:index];
         JXCategoryTitleImageType type = [self.imageTypes[index] integerValue];
+        CGFloat imageWidth = 0;
+        CGSize imageSize = (self.imageSizes && index < self.imageSizes.count) ? [self.imageSizes[index] CGSizeValue] : self.imageSize;
         CGFloat cellWidth = 0;
         switch (type) {
             case JXCategoryTitleImageType_OnlyTitle:
                 cellWidth = titleWidth;
                 break;
             case JXCategoryTitleImageType_OnlyImage:
-                cellWidth = self.imageSize.width;
+                cellWidth = imageSize.width;
                 break;
             case JXCategoryTitleImageType_LeftImage:
             case JXCategoryTitleImageType_RightImage:
-                cellWidth = titleWidth + self.titleImageSpacing + self.imageSize.width;
+                cellWidth = titleWidth + self.titleImageSpacing + imageSize.width;
                 break;
             case JXCategoryTitleImageType_TopImage:
             case JXCategoryTitleImageType_BottomImage:
-                cellWidth = MAX(titleWidth, self.imageSize.width);
+                cellWidth = MAX(titleWidth, imageSize.width);
                 break;
         }
         return cellWidth;
@@ -136,9 +138,10 @@
     if (self.isIgnoreImageWidth) {
         if (targetIndex >= 0 && targetIndex < self.imageTypes.count) {
             JXCategoryTitleImageType type = [self.imageTypes[targetIndex] integerValue];
+            CGSize imageSize = (self.imageSizes && targetIndex < self.imageSizes.count) ? [self.imageSizes[targetIndex] CGSizeValue] : self.imageSize;
             CGFloat imageWidth = 0;
             if (type == JXCategoryTitleImageType_LeftImage || type == JXCategoryTitleImageType_RightImage) {
-                imageWidth = self.titleImageSpacing + self.imageSize.width;
+                imageWidth = self.titleImageSpacing + imageSize.width;
             }
             frame.size.width -= imageWidth;
             if (type == JXCategoryTitleImageType_LeftImage) {
@@ -154,9 +157,10 @@
     if (self.isIgnoreImageWidth) {
         if (targetIndex >= 0 && targetIndex < self.imageTypes.count) {
             JXCategoryTitleImageType type = [self.imageTypes[targetIndex] integerValue];
+            CGSize imageSize = (self.imageSizes && targetIndex < self.imageSizes.count) ? [self.imageSizes[targetIndex] CGSizeValue] : self.imageSize;
             CGFloat imageWidth = 0;
             if (type == JXCategoryTitleImageType_LeftImage || type == JXCategoryTitleImageType_RightImage) {
-                imageWidth = self.titleImageSpacing + self.imageSize.width;
+                imageWidth = self.titleImageSpacing + imageSize.width;
             }
             frame.size.width -= imageWidth;
             if (type == JXCategoryTitleImageType_LeftImage) {

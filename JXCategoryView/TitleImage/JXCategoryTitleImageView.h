@@ -20,6 +20,8 @@
 @property (nonatomic, copy) void(^loadImageBlock)(UIImageView *imageView, id info);
 //图片尺寸。默认CGSizeMake(20, 20)
 @property (nonatomic, assign) CGSize imageSize;
+//每个cell的图片尺寸数组（可选，优先级高于imageSize）
+@property (nonatomic, strong) NSArray<NSValue *> *imageSizes;
 //titleLabel和ImageView的间距，默认5
 @property (nonatomic, assign) CGFloat titleImageSpacing;
 //图片是否缩放。默认为NO
