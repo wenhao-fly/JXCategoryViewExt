@@ -9,6 +9,8 @@
 
 该库是对[JXCategoryView](https://github.com/pujiaxin33/JXCategoryView/)的扩展及优化，目前的JXCategoryView版本1.5.9，JXCategoryViewExt版本1.1.7
 
+fork后用于专门适配自己项目
+
 ## 优化及bug修改
 
 #### 优化
